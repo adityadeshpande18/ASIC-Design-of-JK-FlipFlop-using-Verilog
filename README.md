@@ -30,13 +30,13 @@ The RTL describes only functionality.
 RTL is converted into gate-level logic.
 Flip-flop behavior is mapped to available standard cell D flip-flops.
 Combinational logic is created to implement J and K behavior.
-### Synthesis is performed using:
+## Synthesis is performed using:
 
 Yosys
 Yosys reads:
 Verilog RTL
 Standard cell liberty (.lib) file
-### and generates: Gate-level netlist
+##### and generates: Gate-level netlist
 
 ## Simulation Tools
 RTL simulation is performed using:
@@ -46,31 +46,41 @@ Simulation verifies functional correctness before synthesis.
 
 ## Installing Required Packages (Local Setup)
 apt install iverilog gtkwave yosys
+
 ## RTL Simulation
 iverilog jk_ff.v tb_jk_ff.v
 ./a.out
+
 ## View waveform:
 gtkwave jk_ff.vcd
 
 ## Logic Synthesis Flow
 
-### Start Yosys:
+#### Start Yosys:
 yosys
-### Read liberty file:
+
+#### Read liberty file:
 read_liberty <path_to_liberty_file>.lib
-### Read Verilog:
+
+#### Read Verilog:
 read_verilog jk_ff.v
-### Specify top module:
+
+#### Specify top module:
 synth -top jk_ff
-### Map combinational logic:
+
+#### Map combinational logic:
 abc -liberty <path_to_liberty_file>.lib
-### Map flip-flops:
+
+#### Map flip-flops:
 dfflibmap -liberty <path_to_liberty_file>.lib
-### Optimize:
+
+#### Optimize:
 opt_clean -purge
-### Generate netlist:
+
+#### Generate netlist:
 write_verilog jk_ff_netlist.v
-### Visualize:
+
+#### Visualize:
 show
 
 
@@ -91,8 +101,13 @@ Liberty file → Standard cell library
 
 ## References
 
-VLSI System Design lectures by Kunal Ghosh
-[Yosys](https://yosyshq.net/yosys/)
-Standard cell liberty documentation
+[Yosys – Open Source Logic Synthesizer](https://yosyshq.net/yosys/)
+
+[Icarus Verilog – Verilog Simulator](http://iverilog.icarus.com/)
+
+[GTKWave – Waveform Viewer](http://gtkwave.sourceforge.net/)
+
+[SkyWater 130nm PDK](https://skywater-pdk.readthedocs.io/)
+
 
 
